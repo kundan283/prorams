@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resume Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    form label {
+      display: block;
+      margin-top: 10px;
+    }
+    form input, form textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 15px;
+      background-color: #5cb85c;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .resume {
+      margin-top: 30px;
+      padding: 20px;
+      border-top: 2px solid #000;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Resume Generator</h1>
+    <form id="resume-form">
+      <label for="name">Full Name:</label>
+      <input type="text" id="name" required />
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" required />
+
+      <label for="phone">Phone:</label>
+      <input type="tel" id="phone" required />
+
+      <label for="education">Education:</label>
+      <textarea id="education" required></textarea>
+
+      <label for="experience">Experience:</label>
+      <textarea id="experience" required></textarea>
+
+      <label for="skills">Skills:</label>
+      <textarea id="skills" required></textarea>
+
+      <button type="submit">Generate Resume</button>
+    </form>
+
+    <div id="resume-output" class="resume" style="display: none;">
+      <h2 id="output-name"></h2>
+      <p><strong>Email:</strong> <span id="output-email"></span></p>
+      <p><strong>Phone:</strong> <span id="output-phone"></span></p>
+      <h3>Education</h3>
+      <p id="output-education"></p>
+      <h3>Experience</h3>
+      <p id="output-experience"></p>
+      <h3>Skills</h3>
+      <p id="output-skills"></p>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('resume-form');
+    const resumeOutput = document.getElementById('resume-output');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      document.getElementById('output-name').textContent = document.getElementById('name').value;
+      document.getElementById('output-email').textContent = document.getElementById('email').value;
+      document.getElementById('output-phone').textContent = document.getElementById('phone').value;
+      document.getElementById('output-education').textContent = document.getElementById('education').value;
+      document.getElementById('output-experience').textContent = document.getElementById('experience').value;
+      document.getElementById('output-skills').textContent = document.getElementById('skills').value;
+
+      resumeOutput.style.display = 'block';
+    });
+  </script>
+</body>
+</html>

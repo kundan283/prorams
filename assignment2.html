@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Show Table on Button Click</title>
+  <style>
+    #myTable {
+      display: none;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    #myTable th, #myTable td {
+      border: 1px solid #000;
+      padding: 8px 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <button onclick="showTable()">Show Table</button>
+
+  <table id="myTable">
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+    </tr>
+    <tr>
+      <td>John</td>
+      <td>Doe</td>
+    </tr>
+    <tr>
+      <td>Jane</td>
+      <td>Smith</td>
+    </tr>
+  </table>
+
+  <script>
+    function showTable() {
+      const table = document.getElementById("myTable");
+      table.style.display = "table";
+    }
+  </script>
+
+</body>
+</html>

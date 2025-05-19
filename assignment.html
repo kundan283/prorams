@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .calculator {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    #display {
+      width: 100%;
+      height: 40px;
+      font-size: 1.5em;
+      text-align: right;
+      margin-bottom: 10px;
+      padding: 5px;
+    }
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 60px);
+      grid-gap: 10px;
+    }
+    .buttons button {
+      padding: 15px;
+      font-size: 1em;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .buttons button:hover {
+      background-color: #ddd;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" id="display" disabled>
+    <div class="buttons">
+      <button onclick="appendNumber('7')">7</button>
+      <button onclick="appendNumber('8')">8</button>
+      <button onclick="appendNumber('9')">9</button>
+      <button onclick="appendOperator('/')">/</button>
+
+      <button onclick="appendNumber('4')">4</button>
+      <button onclick="appendNumber('5')">5</button>
+      <button onclick="appendNumber('6')">6</button>
+      <button onclick="appendOperator('*')">*</button>
+
+      <button onclick="appendNumber('1')">1</button>
+      <button onclick="appendNumber('2')">2</button>
+      <button onclick="appendNumber('3')">3</button>
+      <button onclick="appendOperator('-')">-</button>
+
+      <button onclick="appendNumber('0')">0</button>
+      <button onclick="appendDecimal('.')">.</button>
+      <button onclick="calculate()">=</button>
+      <button onclick="appendOperator('+')">+</button>
+
+      <button onclick="clearDisplay()" style="grid-column: span 4; background-color: #f44336; color: white;">C</button>
+    </div>
+  </div>
+
+  <script>
+    let currentInput = '';
+    let currentOperator = '';
+    let previousInput = '';
+
+    function appendNumber(number) {
+      currentInput += number;
+      updateDisplay();
+    }
+
+    function appendOperator(operator) {
+      if (currentInput === '') return;
+      if (previousInput !== '') {
+        calculate();
+      }
+      currentOperator = operator;
+      previousInput = currentInput;
+      currentInput = '';
+    }
+
+    function appendDecimal(dot) {
+      if (!currentInput.includes(dot)) {
+        currentInput += dot;
+        updateDisplay();
+      }
+    }
+
+    function clearDisplay() {
+      currentInput = '';
+      currentOperator = '';
+      previousInput = '';
+      updateDisplay();
+    }
+
+    function calculate() {
+      let result;
+      const prev = parseFloat(previousInput);
+      const current = parseFloat(currentInput);
+      if (isNaN(prev) || isNaN(current)) return;
+      switch (currentOperator) {
+        case '+':
+          result = prev + current;
+          break;
+        case '-':
+          result = prev - current;
+          break;
+        case '*':
+          result = prev * current;
+          break;
+        case '/':
+          result = prev / current;
+          break;
+        default:
+          return;
+      }
+      currentInput = result.toString();
+      currentOperator = '';
+      previousInput = '';
+      updateDisplay();
+    }
+
+    function updateDisplay() {
+      document.getElementById('display').value = currentInput;
+    }
+  </script>
+</body>
+</html>
